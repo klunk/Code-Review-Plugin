@@ -1,0 +1,94 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+    <name>Code Review</name>
+    <description>Allows a developer to send a code review email that details any changes to their code compared with the
+        repository. This email is sent before anything is checked in, so colleagues can have a chance to review your
+        changes before they are committed.
+    </description>
+    <version>1.3.3</version>
+    <vendor url="http://plugins.intellij.net/plugin/?id=1199" email="chris_overseas@hotmail.com">Chris Miller</vendor>
+    <idea-version since-build="7000"/>
+    <change-notes><![CDATA[
+<br>v1.3.3 for IDEA 7.0.3 and up (November 11th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Provides better indication of whether binary files have been added/deleted/changed</li>
+<li>[BUG] Deleted binary files were being treated as text files and as a result their content was showing in the emails</li>
+</ul></p>
+
+<br>v1.3.2 for IDEA 7.0.3 and up (November 11th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Removed until-build attribute from plugin.xml so this plugin plays nicer with various IDEA builds and the (buggy?) Plugin Manager</li>
+</ul></p>
+
+<br>v1.3.1 for IDEA 7.x and up (August 5th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Emails are now sent with UTF-8 encoding</li>
+</ul></p>
+
+<br>v1.3.0 for IDEA 7.x and up (August 4th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[NEW] Copy to clipboard button. This copies the HTML and/or plaintext to the clipboard</li>
+<li>[NEW] SMTPS/SSL support. This allows the plugin to work with mailservers such as GMail</li>
+<li>[IMPROVEMENT] When a file has been renamed, the diff now shows what it was renamed to</li>
+<li>[IMPROVEMENT] The subject defaults to the (first 100 characters of) the commit message</li>
+<li>[BUG] Passwords weren't being decoded properly when settings were first loaded</li>
+<li>[BUG] Long subjects were causing the drop-downs to extend past the RHS of the Code Review dialog</li>
+<li>[BUG] Pressing CTRL-ENTER when the focus was on the subject drop-down could result in changes to the subject being lost</li>
+<li>[BUG] The Cancel button now returns the user to the Commit Changes dialog rather than the editor</li>
+</ul></p>
+
+<br>v1.2.2 for IDEA 7.x (June 26th 2008)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] When a diff fails due to a problem with the underlying VCS, more information is now shown in the error dialog to help diagnose the problem</li>
+<li>[IMPROVEMENT] Minor cosmetic changes</li>
+</ul></p>
+
+<br>v1.2.1 for IDEA 7.x (June 6th 2008)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[BUG] The "to:" field wasn't populating it's history correctly</li>
+<li>[BUG] Fixed spelling mistake</li>
+</ul></p>
+
+<br>v1.2.0 for IDEA 7.x (April 18th 2008)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[NEW] Option to ignore any trailing whitespace</li>
+<li>[NEW] Original line numbers are now shown</li>
+<li>[NEW] Added a button that copies the HTML to the clipboard</li>
+<li>[NEW] Files are sorted by path</li>
+<li>[NEW] More efficient memory usage</li>
+<li>[BUG] Was throwing an exception when a binary file was encountered. Now indicates correctly that the file is binary</li>
+</ul></p>
+
+<br>v1.1.0 for IDEA 6.0.2 (November 17th 2006)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[NEW] A Zip file containing all the changed files can be attached to the email</li>
+<li>[NEW] The drop-down histories now display items with the most recently used entries at the top</li>
+<li>[NEW] Added line number information to the ChangedFile.Line class</li>
+<li>[BUG] Default settings work as originally intended</li>
+<li>[BUG] Fixed NullPointerException that occured when certain settings were blank</li>
+</ul></p>
+
+<br>v1.0.0 for IDEA 6.0.2 (October 31st 2006)</br>
+<br>===========================================</br>
+<p>Initial release.</p>
+]]>
+    </change-notes>
+    <application-components>
+        <component>
+            <implementation-class>net.redyeti.codereview.CodeReviewConfig</implementation-class>
+        </component>
+    </application-components>
+    <project-components>
+        <component>
+            <implementation-class>net.redyeti.codereview.CodeReviewPlugin</implementation-class>
+        </component>
+    </project-components>
+</idea-plugin>

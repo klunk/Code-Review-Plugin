@@ -1,0 +1,42 @@
+## --------------------------------------------------------------------------
+## Valid objects are:
+##
+## $comment  String            - The comment supplied in the commit dialog
+## $config   CodeReviewConfig  - Configuration details from the plugin settings
+## $changes  List<ChangedFile> - A list of changed files that were found
+## --------------------------------------------------------------------------
+$comment
+
+#foreach ($change in $changes)
+==============================================================================
+#if (!$change.BeforeRevision)
+## We have a new file
+Created file $change.AfterFilename
+#elseif (!$change.AfterRevision)
+## We have deleted a file
+Deleted file $change.BeforeFilename
+#elseif ($change.AfterFilename != $change.BeforeFilename)
+## We have renamed a file
+Renamed revision $change.BeforeRevision of file $change.BeforeFilename
+to $change.AfterFilename
+#else
+## We have modified a file
+Modified revision $change.BeforeRevision of file $change.BeforeFilename
+#end
+
+#foreach ($line in $change.Lines)
+#set($lineNum = $htmlHelper.pad($line.BeforeLineNumber, $change.MaxDigits))
+#if ($line.Inserted)
+$lineNum + $line
+#elseif ($line.Deleted)
+$lineNum - $line
+#elseif ($line.Omitted)
+...
+$line.NumLinesOmitted lines skipped
+...
+#else
+$lineNum   $line
+#end
+#end
+
+#end

@@ -1,0 +1,7 @@
+Code Review Plugin
+
+- Add icon to ChangeList tool window
+- Template support
+- Allow editing comment in Code Review dialog
+- [Optional] Outlook voting email support
+- Remember size/location of Code Review dialog

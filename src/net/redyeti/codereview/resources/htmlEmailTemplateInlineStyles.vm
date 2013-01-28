@@ -1,0 +1,61 @@
+## --------------------------------------------------------------------------
+## Valid objects are:
+##
+## $comment    String            - The comment supplied in the commit dialog
+## $config     CodeReviewConfig  - Configuration details from the plugin
+##                                 settings
+## $changes    List<ChangedFile> - A list of changed files that were found
+## $htmlHelper HtmlUtils         - Some helper methods for escaping strings
+## --------------------------------------------------------------------------
+#set($insertedStyle = "color:#$config.InsertedLineColorAsHtml")
+#set($deletedStyle = "color:#$config.DeletedLineColorAsHtml")
+#set($omittedStyle = "color:#$config.OmittedLineColorAsHtml")
+<html>
+<head></head>
+<body style="font-family:Tahoma,Helvetica,Arial,Sans-Serif;font-size:10pt;">
+$htmlHelper.escape($comment)
+
+#foreach ($change in $changes)
+<HR>
+  #if (!$change.BeforeRevision)
+    ## We have a new file
+<p><b>New file created</b><br/>
+$change.AfterFilename</p>
+  #elseif (!$change.AfterRevision)
+    ## We have deleted a file
+<p><b>File deleted</b><br/>
+$change.BeforeFilename</p>
+  #elseif ($change.BeforeFilename != $change.AfterFilename)
+    ## We have renamed a file
+<p><b>Renamed revision $change.BeforeRevision of file</b><br/>
+<b>From:</b> $change.BeforeFilename<br/>
+<b>To:</b> $change.AfterFilename</p>
+  #else
+<p><b>Modified revision $change.BeforeRevision of file</b><br/>
+$change.BeforeFilename</p>
+  #end
+
+<pre style="font-family:ProFontWindows,Courier,Monospaced;font-size:9pt;">
+#foreach ($line in $change.Lines)
+#set($lineNum = $htmlHelper.pad($line.BeforeLineNumber, $change.MaxDigits))
+#if ($line.Inserted)
+#if ($line.PreviousDifferent)<span style="$insertedStyle">#end
+$lineNum + $htmlHelper.escape($line)
+#if ($line.NextDifferent)</span>#end
+#elseif ($line.Deleted)
+#if ($line.PreviousDifferent)<span style="$deletedStyle">#end
+$lineNum - $htmlHelper.escape($line)
+#if ($line.NextDifferent)</span>#end
+#elseif ($line.Omitted)
+<span style="$omittedStyle">...
+$line.NumLinesOmitted lines skipped
+...</span>
+#else
+$lineNum   $htmlHelper.escape($line)
+#end
+#end
+</pre>
+
+#end
+</body>
+</html>
