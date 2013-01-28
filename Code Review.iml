@@ -10,9 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="JavaMail 1.4.2" level="application" />
-    <orderEntry type="library" name="Java Activation Framework 1.1.1" level="application" />
-    <orderEntry type="jdk" jdkName="IDEA JDK" jdkType="IDEA JDK" />
+    <orderEntry type="jdk" jdkName="IDEA IU-123.123" jdkType="IDEA JDK" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -31,6 +29,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="JavaMail 1.4.2" level="project" />
+    <orderEntry type="library" name="Java Activation Framework 1.1.1" level="project" />
   </component>
 </module>
 

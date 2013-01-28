@@ -23,6 +23,7 @@ import com.intellij.openapi.vcs.VcsException;
 import com.intellij.openapi.vcs.changes.*;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.diff.Diff;
+import com.intellij.util.diff.FilesTooBigForDiffException;
 
 /**
  * Builds up HTML and/or plain text that shows the differences in a list of changes
@@ -148,7 +149,13 @@ public class ReviewBuilder {
 
         Diff.Change diff = null;
         if (beforeLines != null && afterLines != null)
-          diff = Diff.buildChanges(beforeLines, afterLines);
+          try {
+            diff = Diff.buildChanges(beforeLines, afterLines);
+          } catch (FilesTooBigForDiffException e) {
+            StringBuilder buf = new StringBuilder(200);
+            buf.append("Error comparing differences, file sizes too big");
+            throw new BuildException(buf.toString(), e);
+          }
 
         lines = buildLines(diff, beforeLines, afterLines, config.getLinesOfContext());
       }

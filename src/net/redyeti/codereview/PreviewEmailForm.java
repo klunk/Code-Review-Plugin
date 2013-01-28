@@ -79,7 +79,7 @@ public class PreviewEmailForm {
       previewTabs.setSelectedIndex(1);
     }
 
-    Icon copyIcon = new ImageIcon(getClass().getResource("/general/copy.png"));
+    Icon copyIcon = new ImageIcon(getClass().getResource("/actions/copy.png"));
     copyHtmlButton.setIcon(copyIcon);
     copyHtmlButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
