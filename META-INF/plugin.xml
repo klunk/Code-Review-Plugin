@@ -13,6 +13,7 @@
 <br>===========================================</br>
 <p><ul>
 <li>[BUG] Fix location of copy button icon.</li>
+<li>[BUG] Give a meaningfull explanation if the file sizes are too large to compare.</li>
 </ul></p>
 
 <br>v1.3.3 for IDEA 7.0.3 and up (November 11th 2009)</br>
