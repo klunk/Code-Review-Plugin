@@ -99,7 +99,7 @@ public class CodeReviewCommitSession implements CommitSession {
   }
 
   public String getHelpId() {
-    return null;  //To change body of implemented methods use File | Settings | File Templates.
+    return null;
   }
 
   private static void showMessage(final String message, final String title, final Icon icon) {

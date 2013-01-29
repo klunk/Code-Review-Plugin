@@ -134,9 +134,8 @@ public class ReviewBuilder {
         throw new BuildException(buf.toString(), e);
       }
 
-      List<ChangedFile.Line> lines;
+      List<ChangedFile.Line> lines = new ArrayList<ChangedFile.Line>(1);
       if (beforeContent.isBinary() || afterContent.isBinary()) {
-        lines = new ArrayList<ChangedFile.Line>(1);
         if (beforeRevStr == null)
           lines.add(new ChangedFile.Line("Binary file has been added", ChangedFile.LineType.UNCHANGED, 1, 1));
         else if (afterRevStr == null)
@@ -151,13 +150,10 @@ public class ReviewBuilder {
         if (beforeLines != null && afterLines != null)
           try {
             diff = Diff.buildChanges(beforeLines, afterLines);
+            lines = buildLines(diff, beforeLines, afterLines, config.getLinesOfContext());
           } catch (FilesTooBigForDiffException e) {
-            StringBuilder buf = new StringBuilder(200);
-            buf.append("Error comparing differences, file sizes too big");
-            throw new BuildException(buf.toString(), e);
+            lines.add(new ChangedFile.Line("The differences is too big to compare", ChangedFile.LineType.UNCHANGED, 1, 1));
           }
-
-        lines = buildLines(diff, beforeLines, afterLines, config.getLinesOfContext());
       }
       ChangedFile changedFile = new ChangedFile(beforeName, afterName, beforeRevStr, afterRevStr, lines);
       changeList.add(changedFile);
