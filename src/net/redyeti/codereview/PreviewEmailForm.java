@@ -1,26 +1,17 @@
 package net.redyeti.codereview;
 
-import java.awt.Toolkit;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Reader;
-import java.io.StringReader;
 
 import javax.swing.*;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
 
 import org.jetbrains.annotations.Nullable;
-import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.gui.HtmlPanel;
-import org.lobobrowser.html.parser.DocumentBuilderImpl;
-import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.html.test.SimpleHtmlRendererContext;
-import org.lobobrowser.html.test.SimpleUserAgentContext;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
@@ -31,7 +22,7 @@ public class PreviewEmailForm {
   private ComboBoxWithStoredHistory ccTextField;
   private ComboBoxWithStoredHistory bccTextField;
   private ComboBoxWithStoredHistory subjectTextField;
-  private HtmlPanel htmlPreview;
+  private JEditorPane htmlPreview;
   private JTabbedPane previewTabs;
   private JTextArea textPreview;
   private JCheckBox attachZipCheckBox;
@@ -112,13 +103,12 @@ public class PreviewEmailForm {
   }
 
   protected void initHtmlPanel(String html) throws Exception {
-    Reader reader = new StringReader(html);
-    InputSource is = new InputSourceImpl(reader);
-    UserAgentContext agentContext = new SimpleUserAgentContext();
-    HtmlRendererContext rendererContext = new SimpleHtmlRendererContext(htmlPreview);
-    DocumentBuilderImpl builder = new DocumentBuilderImpl(agentContext, rendererContext);
-    Document document = builder.parse(is);
-    htmlPreview.setDocument(document, rendererContext);
+    HTMLEditorKit editorKit = new HTMLEditorKit();
+    htmlPreview.setEditorKit(editorKit);
+    Document doc = editorKit.createDefaultDocument();
+    htmlPreview.setDocument(doc);
+    htmlPreview.setText(html);
+    htmlPreview.setCaretPosition(0);
   }
 
   private void createUIComponents() {
