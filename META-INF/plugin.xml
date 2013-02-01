@@ -9,12 +9,17 @@
     <vendor url="http://plugins.intellij.net/plugin/?id=1199" email="chris_overseas@hotmail.com">Chris Miller</vendor>
     <idea-version since-build="123.123"/>
     <change-notes><![CDATA[
+<br>v1.3.5 for IDEA 12.0.2 and up (February 1st 2013) - Simon Wiehe</br>
+<br>===========================================</br>
+<p><ul>
+<li>[BUG] Build with JDK 1.6.</li>
+</ul></p>
+
 <br>v1.3.4 for IDEA 12.0.2 and up (January 28th 2013) - Simon Wiehe</br>
 <br>===========================================</br>
 <p><ul>
+<li>[IMPROVEMENT] Give a meaningful explanation if the file sizes are too large to compare.</li>
 <li>[BUG] Fix location of copy button icon.</li>
-<li>[BUG] Give a meaningfull explanation if the file sizes are too large to compare.</li>
-<li>[KNOWN ISSUE] HTML format emails do not currently work with Intellij IDEA 12.0.2 and Java 1.7.</li>
 </ul></p>
 
 <br>v1.3.3 for IDEA 7.0.3 and up (November 11th 2009)</br>
