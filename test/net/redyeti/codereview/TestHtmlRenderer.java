@@ -4,26 +4,18 @@ import java.awt.event.*;
 import java.io.*;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLEditorKit;
 
-import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.gui.HtmlPanel;
-import org.lobobrowser.html.parser.DocumentBuilderImpl;
-import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.html.test.SimpleHtmlRendererContext;
-import org.lobobrowser.html.test.SimpleUserAgentContext;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-public class TestCobraRenderer extends JDialog {
+public class TestHtmlRenderer extends JDialog {
   private JPanel contentPane;
   private JButton buttonOK;
   private JButton buttonCancel;
   private JTextArea textArea;
-  private HtmlPanel htmlPanel;
+  private JEditorPane htmlPanel;
 
-  public TestCobraRenderer() {
+  public TestHtmlRenderer() {
     setContentPane(contentPane);
     setModal(true);
 
@@ -72,25 +64,16 @@ public class TestCobraRenderer extends JDialog {
   }
 
   private void updateHtml() throws IOException, SAXException {
-    Reader reader = new StringReader(textArea.getText());
-    InputSource is = new InputSourceImpl(reader);
-    UserAgentContext agentContext = new SimpleUserAgentContext();
-    HtmlRendererContext rendererContext = new LocalHtmlRendererContext(htmlPanel);
-    DocumentBuilderImpl builder = new DocumentBuilderImpl(agentContext, rendererContext);
-    Document document = builder.parse(is);
-    htmlPanel.setDocument(document, rendererContext);
-  }
-
-  private static class LocalHtmlRendererContext extends SimpleHtmlRendererContext {
-    // Override methods here to implement browser functionality
-
-    public LocalHtmlRendererContext(HtmlPanel contextComponent) {
-      super(contextComponent);
-    }
+    HTMLEditorKit editorKit = new HTMLEditorKit();
+    htmlPanel.setEditorKit(editorKit);
+    javax.swing.text.Document doc = editorKit.createDefaultDocument();
+    htmlPanel.setDocument(doc);
+    htmlPanel.setText(textArea.getText());
+    htmlPanel.setCaretPosition(0);
   }
 
   public static void main(String[] args) {
-    TestCobraRenderer dialog = new TestCobraRenderer();
+    TestHtmlRenderer dialog = new TestHtmlRenderer();
     dialog.pack();
     dialog.setVisible(true);
     System.exit(0);
