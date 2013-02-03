@@ -5,7 +5,7 @@
         repository. This email is sent before anything is checked in, so colleagues can have a chance to review your
         changes before they are committed.
     </description>
-    <version>1.3.4</version>
+    <version>1.3.5</version>
     <vendor url="http://plugins.intellij.net/plugin/?id=1199" email="chris_overseas@hotmail.com">Chris Miller</vendor>
     <idea-version since-build="123.123"/>
     <change-notes><![CDATA[
