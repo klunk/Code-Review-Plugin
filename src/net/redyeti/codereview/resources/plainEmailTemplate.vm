@@ -7,6 +7,27 @@
 ## --------------------------------------------------------------------------
 $comment
 
+Files:
+
+#foreach($change in $changes)
+    #if (!$change.BeforeRevision)
+    ## We have a new file
+    add - $change.AfterFilename
+    #elseif (!$change.AfterRevision)
+    ## We have deleted a file
+    delete - $change.BeforeFilename
+    #elseif ($change.AfterFilename != $change.BeforeFilename)
+    ## We have renamed a file
+    move/rename - $change.BeforeFilename
+             to - $change.AfterFilename
+    #else
+    ## We have modified a file
+    edit - $change.BeforeFilename
+    #end
+#end
+
+Changes:
+
 #foreach ($change in $changes)
 ==============================================================================
 #if (!$change.BeforeRevision)

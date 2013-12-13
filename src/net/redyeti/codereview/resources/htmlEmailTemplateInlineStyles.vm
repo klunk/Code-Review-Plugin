@@ -15,6 +15,30 @@
 <body style="font-family:Tahoma,Helvetica,Arial,Sans-Serif;font-size:10pt;">
 $htmlHelper.escape($comment)
 
+<br />
+<br />
+<b>Files:</b><br />
+<ul>
+    #foreach($change in $changes)
+        #if (!$change.BeforeRevision)
+        ## We have a new file
+        <li><font color="green">add</font> - $change.AfterFilename</li>
+        #elseif (!$change.AfterRevision)
+        ## We have deleted a file
+        <li><font color="red">delete</font> - $change.BeforeFilename</li>
+        #elseif ($change.AfterFilename != $change.BeforeFilename)
+        ## We have renamed a file
+        <li><font color="orange">move/rename</font> - $change.BeforeFilename <font color="orange">to</font> $change.AfterFilename</li>
+        #else
+        ## We have modified a file
+        <li><font color="blue">edit</font> - $change.BeforeFilename</li>
+        #end
+    #end
+</ul>
+<br />
+<b>Changes:</b><br />
+<br />
+
 #foreach ($change in $changes)
 <HR>
   #if (!$change.BeforeRevision)
