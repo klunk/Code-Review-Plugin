@@ -5,10 +5,16 @@
         repository. This email is sent before anything is checked in, so colleagues can have a chance to review your
         changes before they are committed.
     </description>
-    <version>1.3.5</version>
+    <version>1.3.6</version>
     <vendor url="http://plugins.intellij.net/plugin/?id=1199" email="chris_overseas@hotmail.com">Chris Miller</vendor>
-    <idea-version since-build="123.123"/>
+    <idea-version since-build="129.1359"/>
     <change-notes><![CDATA[
+<br>v1.3.6 for IDEA 12.0.2 and up (December 13th 2013) - Simon Wiehe</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Add a list of the changed files at the start of the email.</li>
+</ul></p>
+
 <br>v1.3.5 for IDEA 12.0.2 and up (February 1st 2013) - Simon Wiehe</br>
 <br>===========================================</br>
 <p><ul>
